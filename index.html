@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Duck Animation</title>
+    <title>Bouncing Magnifying Glass</title>
     <style>
         body {
             background-color: #001a00; /* Very Dark Green, almost black */
             margin: 0;
-            overflow: hidden; /* Hide overflow to contain the duck */
+            overflow: hidden; /* Hide overflow to contain the magnifying glass */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        .duck-container {
+        .magnifying-glass-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -19,20 +23,36 @@
             height: 100%;
         }
 
-        .duck {
-            position: absolute;
-            fill: #FFF8DC; /* Cornsilk color for the duck */
-            width: 100px;
-            height: 100px;
-            animation: moveDuck 10s linear infinite;
+        #magnifying-glass {
+            font-size: 10em;
+            display: inline-block;
+            width: 0.4em;
+            box-sizing: content-box;
+            height: 0.4em;
+            border: 0.1em solid red;
+            position: relative;
+            border-radius: 0.35em;
         }
 
-        @keyframes moveDuck {
+        #magnifying-glass:before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            right: -0.25em;
+            bottom: -0.1em;
+            border-width: 0;
+            background: red;
+            width: 0.35em;
+            height: 0.08em;
+            transform: rotate(45deg);
+        }
+
+        @keyframes moveMagnifyingGlass {
             0% {
                 transform: translate(0, 0);
             }
             100% {
-                transform: translate(2000px, 2000px); /* Adjust this to change duck movement */
+                transform: translate(2000px, 2000px); /* Adjust this to change movement */
             }
         }
 
@@ -48,14 +68,43 @@
     </style>
 </head>
 <body>
-    <div class="duck-container">
-        <svg class="duck" viewBox="0 0 64 64">
-            <!-- Simple duck SVG path -->
-            <path d="M32 4C18.7 4 8 14.7 8 28s10.7 24 24 24 24-10.7 24-24S45.3 4 32 4zM42.9 33.7c-2.7 0-4.9 2.2-4.9 4.9 0 2.7 2.2 4.9 4.9 4.9 2.7 0 4.9-2.2 4.9-4.9 0-2.7-2.2-4.9-4.9-4.9zM24 32c-2.7 0-4.9 2.2-4.9 4.9 0 2.7 2.2 4.9 4.9 4.9 2.7 0 4.9-2.2 4.9-4.9 0-2.7-2.2-4.9-4.9-4.9z"/>
-        </svg>
+    <div class="magnifying-glass-container">
+        <div id="magnifying-glass" style="position:absolute;"></div>
     </div>
 
     <h1>Welcome to my webpage</h1>
     <p>I am currently in the process of updating it and trying out different options. Nothing to see here yet.</p>
+
+    <script>
+        const magnifyingGlass = document.getElementById('magnifying-glass');
+        let x = 0;
+        let y = 0;
+        let dx = 2;
+        let dy = 2;
+        const magnifyingGlassWidth = magnifyingGlass.offsetWidth;
+        const magnifyingGlassHeight = magnifyingGlass.offsetHeight;
+
+        function moveMagnifyingGlass() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            // Bounce off the walls
+            if (x + dx > width - magnifyingGlassWidth || x + dx < 0) {
+                dx = -dx;
+            }
+            if (y + dy > height - magnifyingGlassHeight || y + dy < 0) {
+                dy = -dy;
+            }
+
+            x += dx;
+            y += dy;
+
+            magnifyingGlass.style.transform = `translate(${x}px, ${y}px)`;
+
+            requestAnimationFrame(moveMagnifyingGlass);
+        }
+
+        moveMagnifyingGlass();
+    </script>
 </body>
 </html>
