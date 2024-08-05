@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouncing Magnifying Glass</title>
+    <title>Bouncing Magnifying Glass with Link</title>
     <style>
         body {
             background-color: #001a00; /* Very Dark Green, almost black */
@@ -80,6 +80,8 @@
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative; /* Ensure link is clickable */
+            z-index: 10; /* Ensure link appears above other elements */
         }
 
         a:hover {
@@ -90,7 +92,7 @@
 </head>
 <body>
     <div class="magnifying-glass-container">
-        <div id="magnifying-glass" style="position:absolute;"></div>
+        <div id="magnifying-glass"></div>
     </div>
 
     <h1>Welcome to my webpage</h1>
