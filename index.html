@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Pipe Animation</title>
+    <title>Retro Duck Animation</title>
     <style>
         body {
             background-color: #001a00; /* Very Dark Green, almost black */
             margin: 0;
-            overflow: hidden; /* Hide overflow to contain the pipes */
+            overflow: hidden; /* Hide overflow to contain the duck */
         }
 
-        .pipe-container {
+        .duck-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -19,22 +19,20 @@
             height: 100%;
         }
 
-        .pipe {
+        .duck {
             position: absolute;
-            fill: none;
-            stroke: #FFF8DC; /* Cornsilk color */
-            stroke-width: 10;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            animation: movePipe 10s linear infinite;
+            fill: #FFF8DC; /* Cornsilk color for the duck */
+            width: 100px;
+            height: 100px;
+            animation: moveDuck 10s linear infinite;
         }
 
-        @keyframes movePipe {
+        @keyframes moveDuck {
             0% {
                 transform: translate(0, 0);
             }
             100% {
-                transform: translate(2000px, 2000px); /* Adjust this to change pipe movement */
+                transform: translate(2000px, 2000px); /* Adjust this to change duck movement */
             }
         }
 
@@ -50,9 +48,10 @@
     </style>
 </head>
 <body>
-    <div class="pipe-container">
-        <svg class="pipe" viewBox="0 0 400 400">
-            <path d="M 10 10 H 200 V 100 H 50 V 300 H 350 V 150 H 100 V 350 H 200" />
+    <div class="duck-container">
+        <svg class="duck" viewBox="0 0 64 64">
+            <!-- Simple duck SVG path -->
+            <path d="M32 4C18.7 4 8 14.7 8 28s10.7 24 24 24 24-10.7 24-24S45.3 4 32 4zM42.9 33.7c-2.7 0-4.9 2.2-4.9 4.9 0 2.7 2.2 4.9 4.9 4.9 2.7 0 4.9-2.2 4.9-4.9 0-2.7-2.2-4.9-4.9-4.9zM24 32c-2.7 0-4.9 2.2-4.9 4.9 0 2.7 2.2 4.9 4.9 4.9 2.7 0 4.9-2.2 4.9-4.9 0-2.7-2.2-4.9-4.9-4.9z"/>
         </svg>
     </div>
 
