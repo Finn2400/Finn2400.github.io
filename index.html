@@ -80,7 +80,7 @@
 									<iframe
 										class="hero-flipbook-panel"
 										title="Interactive protease RMSX flipbook hero"
-										src="flipbooks/rmsx-protease-hero.html?spacing=0.72&amp;rotZ=96"
+										src="flipbooks/rmsx-protease-hero.html"
 										loading="eager"
 										referrerpolicy="no-referrer">
 									</iframe>
@@ -198,6 +198,30 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				(function () {
+					const frame = document.querySelector('.hero-flipbook-panel');
+					if (!frame) {
+						return;
+					}
+					let ticking = false;
+					function updateHeroRotation() {
+						ticking = false;
+						const progress = Math.max(0, Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 1.4)));
+						frame.contentWindow?.postMessage({ type: 'rmsx-hero-rotation', rotY: progress * 120, rotZ: 96 }, window.location.origin);
+					}
+					function requestHeroRotation() {
+						if (!ticking) {
+							ticking = true;
+							window.requestAnimationFrame(updateHeroRotation);
+						}
+					}
+					window.addEventListener('scroll', requestHeroRotation, { passive: true });
+					window.addEventListener('resize', requestHeroRotation);
+					frame.addEventListener('load', requestHeroRotation);
+					requestHeroRotation();
+				}());
+			</script>
 
 	</body>
 </html>
