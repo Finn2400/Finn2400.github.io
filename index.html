@@ -12,6 +12,25 @@
 		<meta name="description" content="Finn Beruldsen: Structural Bioinformatician and Researcher in Computational Immunotherapy and Structural Biology">
 		<meta name="keywords" content="immunotherapy, bioinformatics, computational biology, T-cell receptor, neoantigen prediction">
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.flipbook-frame {
+				width: 100%;
+				min-height: 430px;
+				border: 1px solid #d7dce2;
+				border-radius: 8px;
+				background: #fff;
+			}
+
+			.flipbook-actions {
+				margin-top: 1rem;
+			}
+
+			@media screen and (max-width: 736px) {
+				.flipbook-frame {
+					min-height: 360px;
+				}
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -28,6 +47,7 @@
 						<li><a href="#one" class="active">About</a></li>
 						<li><a href="#two">Things I Can Do</a></li>
 						<li><a href="#three">A Few Accomplishments</a></li>
+						<li><a href="#rmsx-flipbook">RMSX Flipbook</a></li>
 						<li><a href="#four">Contact</a></li>
 					</ul>
 				</nav>
@@ -101,6 +121,24 @@
 											</div>
 										</article>
 									</div>
+								</div>
+							</section>
+
+						<!-- RMSX Flipbook -->
+							<section id="rmsx-flipbook">
+								<div class="container">
+									<h3>Interactive RMSX Flipbook</h3>
+									<p>This embedded Molstar viewer shows a protease RMSX flipbook directly in the browser. The slider adjusts spacing between snapshots so protein motion can be inspected without downloading local visualization files.</p>
+									<iframe
+										class="flipbook-frame"
+										title="Interactive protease RMSX flipbook"
+										src="flipbooks/rmsx-protease-flipbook.html"
+										loading="lazy"
+										referrerpolicy="no-referrer">
+									</iframe>
+									<ul class="actions flipbook-actions">
+										<li><a href="flipbooks/rmsx-protease-flipbook.html" class="button" target="_blank" rel="noopener noreferrer">Open Full Viewer</a></li>
+									</ul>
 								</div>
 							</section>
 
