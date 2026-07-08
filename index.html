@@ -13,29 +13,93 @@
 		<meta name="keywords" content="immunotherapy, bioinformatics, computational biology, T-cell receptor, neoantigen prediction">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<style>
-			.flipbook-frame {
-				width: 100%;
-				min-height: 430px;
-				border: 1px solid #d7dce2;
-				border-radius: 8px;
-				background: #fff;
+			:root {
+				--hero-start-height: clamp(18em, 18vw, 22em);
+				--hero-full-height: clamp(34em, 48vw, 56em);
+				--hero-min-height: clamp(8em, 10vw, 11em);
+				--hero-end-height-extra: 12px;
+				--hero-visible-height: var(--hero-start-height);
+				--hero-clip-bottom: 0px;
+				--hero-frame-offset: calc((var(--hero-start-height) - var(--hero-full-height)) / 2);
+				--hero-sticky-top: 0px;
 			}
 
-			.flipbook-actions {
-				margin-top: 1rem;
+			.rmsx-hero-stage {
+				position: sticky;
+				top: var(--hero-sticky-top);
+				z-index: 2;
+				height: var(--hero-start-height) !important;
+				margin-bottom: calc(-1 * var(--hero-clip-bottom));
+				overflow: hidden;
+				clip-path: inset(0 0 var(--hero-clip-bottom) 0);
+				background: #000 !important;
 			}
 
 			.hero-flipbook-panel {
+				position: relative;
+				top: var(--hero-frame-offset);
 				display: block;
 				width: 100%;
-				height: 100%;
+				height: var(--hero-full-height);
 				border: 0;
 				background: #000;
+				pointer-events: none;
 			}
 
 			@media screen and (max-width: 736px) {
-				.flipbook-frame {
-					min-height: 360px;
+				:root {
+					--hero-start-height: 12em;
+					--hero-full-height: 22em;
+					--hero-min-height: 7em;
+					--hero-end-height-extra: 12px;
+					--hero-frame-offset: calc((var(--hero-start-height) - var(--hero-full-height)) / 2);
+					--hero-sticky-top: 44px;
+				}
+			}
+
+			.flipbook-note {
+				color: #6f757d;
+				font-size: 1.05em;
+				margin-bottom: 1.5em;
+				max-width: 52em;
+			}
+
+			.flipbook-frame {
+				border: 1px solid #d9dde3;
+				border-radius: 6px;
+				background: #fff;
+				overflow: hidden;
+			}
+
+			.flipbook-frame iframe {
+				display: block;
+				width: 100%;
+				height: min(44vh, 420px);
+				min-height: 340px;
+				border: 0;
+			}
+
+			.flipbook-links {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				margin-top: 1em;
+				font-size: 0.95em;
+			}
+
+			.flipbook-links a {
+				color: #6f757d;
+				border-bottom-color: rgba(111, 117, 125, 0.35);
+			}
+
+			#main > #four > .container {
+				max-width: 88em;
+			}
+
+			@media screen and (max-width: 736px) {
+				.flipbook-frame iframe {
+					height: 24em;
+					min-height: 300px;
 				}
 			}
 		</style>
@@ -55,8 +119,8 @@
 						<li><a href="#one" class="active">About</a></li>
 						<li><a href="#two">Things I Can Do</a></li>
 						<li><a href="#three">A Few Accomplishments</a></li>
-						<li><a href="#rmsx-flipbook">RMSX Flipbook</a></li>
-						<li><a href="#four">Contact</a></li>
+						<li><a href="#four">RMSX</a></li>
+						<li><a href="#five">Contact</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -76,12 +140,13 @@
 
 						<!-- One -->
 							<section id="one">
-								<div class="image main" data-position="center">
+								<div class="image main rmsx-hero-stage" data-position="center">
 									<iframe
 										class="hero-flipbook-panel"
 										title="Interactive protease RMSX flipbook hero"
-										src="flipbooks/rmsx-protease-hero.html"
+										src="flipbooks/rmsx-protease-hero.html?site=pre-jitter-fix-v12-one-turn"
 										loading="eager"
+										tabindex="-1"
 										referrerpolicy="no-referrer">
 									</iframe>
 								</div>
@@ -138,26 +203,31 @@
 								</div>
 							</section>
 
-						<!-- RMSX Flipbook -->
-							<section id="rmsx-flipbook">
+						<!-- Four -->
+							<section id="four">
 								<div class="container">
 									<h3>Interactive RMSX Flipbook</h3>
-									<p>This embedded Molstar viewer shows a protease RMSX flipbook directly in the browser. The slider adjusts spacing between snapshots so protein motion can be inspected without downloading local visualization files.</p>
-									<iframe
-										class="flipbook-frame"
-										title="Interactive protease RMSX flipbook"
-										src="flipbooks/rmsx-protease-flipbook.html"
-										loading="lazy"
-										referrerpolicy="no-referrer">
-									</iframe>
-									<ul class="actions flipbook-actions">
-										<li><a href="flipbooks/rmsx-protease-flipbook.html" class="button" target="_blank" rel="noopener noreferrer">Open Full Viewer</a></li>
-									</ul>
+									<p class="flipbook-note">Full-trajectory ubiquitin RMSX, rendered directly in the browser with Molstar.</p>
+									<div class="flipbook-frame">
+										<iframe
+											class="responsive-flipbook"
+											title="Interactive ubiquitin pulling RMSX flipbook"
+											src="flipbooks/rmsx-uqb-chain7-flipbook.html?palette=viridis&amp;spacing=0.58&amp;rotZ=0&amp;viewScale=2.18&amp;embed=uqb-trajectory-responsive"
+											data-flipbook-base="flipbooks/rmsx-uqb-chain7-flipbook.html"
+											loading="lazy"
+											referrerpolicy="no-referrer">
+										</iframe>
+									</div>
+									<div class="flipbook-links">
+										<a href="https://github.com/Finn2400/rmsx" target="_blank" rel="noreferrer">RMSX on GitHub</a>
+										<a href="https://doi.org/10.1038/s41598-026-39869-7" target="_blank" rel="noreferrer">RMSX/Flipbook paper</a>
+										<a href="flipbooks/rmsx-uqb-chain7-flipbook.html?palette=viridis&amp;spacing=0.58&amp;rotZ=0&amp;viewScale=2.18&amp;embed=uqb-trajectory-responsive" target="_blank" rel="noreferrer">Open full viewer</a>
+									</div>
 								</div>
 							</section>
 
-						<!-- Four -->
-							<section id="four">
+						<!-- Five -->
+							<section id="five">
 								<div class="container">
 									<h3>Contact Me</h3>
 									<form method="post" action="#">
@@ -201,25 +271,144 @@
 			<script>
 				(function () {
 					const frame = document.querySelector('.hero-flipbook-panel');
+					const hero = document.querySelector('.rmsx-hero-stage');
 					if (!frame) {
 						return;
 					}
 					let ticking = false;
-					function updateHeroRotation() {
-						ticking = false;
-						const progress = Math.max(0, Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 1.4)));
-						frame.contentWindow?.postMessage({ type: 'rmsx-hero-rotation', rotY: progress * 120, rotZ: 96 }, window.location.origin);
+					let startHeight = 320;
+					let fullHeight = 576;
+					let minHeight = 160;
+					let endHeightExtra = 0;
+					let heroStartY = 0;
+					let targetProgress = 0;
+					let displayedProgress = 0;
+					let lastPostedProgress = -1;
+					let lastPostTime = 0;
+
+					function clamp(value, min, max) {
+						return Math.min(max, Math.max(min, value));
 					}
-					function requestHeroRotation() {
-						if (!ticking) {
-							ticking = true;
-							window.requestAnimationFrame(updateHeroRotation);
+
+					function cssLengthToPixels(value, fallback) {
+						const probe = document.createElement('div');
+						probe.style.position = 'absolute';
+						probe.style.visibility = 'hidden';
+						probe.style.height = value;
+						document.body.appendChild(probe);
+						const pixels = probe.getBoundingClientRect().height;
+						probe.remove();
+						return Number.isFinite(pixels) && pixels > 0 ? pixels : fallback;
+					}
+
+					function measureHero() {
+						const styles = getComputedStyle(document.documentElement);
+						startHeight = cssLengthToPixels(styles.getPropertyValue('--hero-start-height').trim(), hero?.offsetHeight || 320);
+						fullHeight = cssLengthToPixels(styles.getPropertyValue('--hero-full-height').trim(), startHeight);
+						minHeight = cssLengthToPixels(styles.getPropertyValue('--hero-min-height').trim(), startHeight * 0.5);
+						endHeightExtra = cssLengthToPixels(styles.getPropertyValue('--hero-end-height-extra').trim(), 0);
+						heroStartY = (hero?.getBoundingClientRect().top || 0) + window.scrollY - cssLengthToPixels(styles.getPropertyValue('--hero-sticky-top').trim(), 0);
+					}
+
+					function readScrollProgress() {
+						return clamp((window.scrollY - heroStartY) / Math.max(1, startHeight * 1.1), 0, 1);
+					}
+
+					function renderHero(progress, timestamp) {
+						const eased = progress * progress * (3 - (2 * progress));
+						const endOnlyExtra = endHeightExtra * Math.pow(eased, 4);
+						const visibleHeight = startHeight - ((startHeight - minHeight) * eased) + endOnlyExtra;
+						const clipBottom = Math.max(0, startHeight - visibleHeight);
+						const frameOffset = (visibleHeight - fullHeight) / 2;
+						document.documentElement.style.setProperty('--hero-visible-height', `${visibleHeight.toFixed(2)}px`);
+						document.documentElement.style.setProperty('--hero-clip-bottom', `${clipBottom.toFixed(2)}px`);
+						document.documentElement.style.setProperty('--hero-frame-offset', `${frameOffset.toFixed(2)}px`);
+						if (Math.abs(progress - lastPostedProgress) > 0.006 && timestamp - lastPostTime > 40) {
+							lastPostedProgress = progress;
+							lastPostTime = timestamp;
+							frame.contentWindow?.postMessage({ type: 'rmsx-hero-rotation', progress, rotZ: 96 }, window.location.origin);
 						}
 					}
-					window.addEventListener('scroll', requestHeroRotation, { passive: true });
-					window.addEventListener('resize', requestHeroRotation);
-					frame.addEventListener('load', requestHeroRotation);
-					requestHeroRotation();
+
+					function updateHero(timestamp) {
+						const delta = targetProgress - displayedProgress;
+						if (Math.abs(delta) < 0.0015) {
+							displayedProgress = targetProgress;
+							renderHero(displayedProgress, timestamp);
+							ticking = false;
+							return;
+						}
+						displayedProgress += delta * 0.26;
+						renderHero(displayedProgress, timestamp);
+						window.requestAnimationFrame(updateHero);
+					}
+
+					function requestHeroUpdate() {
+						targetProgress = readScrollProgress();
+						if (!ticking) {
+							ticking = true;
+							window.requestAnimationFrame(updateHero);
+						}
+					}
+
+					function handleResize() {
+						measureHero();
+						requestHeroUpdate();
+					}
+
+					measureHero();
+					displayedProgress = readScrollProgress();
+					targetProgress = displayedProgress;
+					window.addEventListener('scroll', requestHeroUpdate, { passive: true });
+					window.addEventListener('resize', handleResize);
+					frame.addEventListener('load', requestHeroUpdate);
+					requestHeroUpdate();
+				}());
+
+				(function () {
+					const frame = document.querySelector('.responsive-flipbook');
+					if (!frame) {
+						return;
+					}
+					let lastSrc = '';
+					let resizeTimer = 0;
+
+					function settingsForWidth(width) {
+						if (width < 520) {
+							return { spacing: 0.44, viewScale: 1.5 };
+						}
+						if (width < 760) {
+							return { spacing: 0.58, viewScale: 2.18 };
+						}
+						if (width < 1040) {
+							return { spacing: 0.68, viewScale: 2.65 };
+						}
+						return { spacing: 0.78, viewScale: 3.0 };
+					}
+
+					function applyResponsiveFlipbook() {
+						const width = frame.getBoundingClientRect().width || window.innerWidth;
+						const settings = settingsForWidth(width);
+						const url = new URL(frame.dataset.flipbookBase || frame.src, window.location.href);
+						url.searchParams.set('palette', 'viridis');
+						url.searchParams.set('spacing', String(settings.spacing));
+						url.searchParams.set('rotZ', '0');
+						url.searchParams.set('viewScale', String(settings.viewScale));
+						url.searchParams.set('embed', `uqb-trajectory-responsive-${Math.round(width)}`);
+						const nextSrc = url.pathname.replace(/^\//, '') + url.search;
+						if (nextSrc !== lastSrc && frame.getAttribute('src') !== nextSrc) {
+							lastSrc = nextSrc;
+							frame.setAttribute('src', nextSrc);
+						}
+					}
+
+					function requestResponsiveFlipbook() {
+						window.clearTimeout(resizeTimer);
+						resizeTimer = window.setTimeout(applyResponsiveFlipbook, 120);
+					}
+
+					window.addEventListener('resize', requestResponsiveFlipbook);
+					applyResponsiveFlipbook();
 				}());
 			</script>
 
